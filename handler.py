@@ -5,7 +5,7 @@ from flask import Flask, request, Response
 from healthinsurance.HealthInsurance import HealthInsurance
 
 # loading model
-home_path = os.path.dirname(os.getcwd())
+home_path = os.getcwd()
 
 model = pickle.load(open(os.path.join(
     home_path, 'src', 'models', 'model_linear_regression.pkl'), 'rb'))
