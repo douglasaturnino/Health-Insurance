@@ -24,7 +24,7 @@ class HealthInsurance(object):
         # 1.1. Rename Columns
         cols_new = ['id', 'gender', 'age', 'driving_license', 'region_code',
                     'previously_insured', 'vehicle_age', 'vehicle_damage', 'annual_premium',
-                    'policy_sales_channel', 'vintage', 'score']
+                    'policy_sales_channel', 'vintage', 'response']
 
         data.columns = cols_new
         return data
@@ -75,6 +75,6 @@ class HealthInsurance(object):
         # model prediction
         pred = model.predict_proba(test_data)
         # join prediction into original data
-        original_data['score'] = pred[:, 1].tolist()
+        original_data['response'] = pred[:, 1].tolist()
 
         return original_data.to_json(orient='records', date_format='iso')
