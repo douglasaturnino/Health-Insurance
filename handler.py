@@ -24,6 +24,7 @@ def health_insurance_predict():
         else:
             test_raw = pd.DataFrame(test_json, columns=test_json[0].keys())
 
+        print(test_raw)
         # Instantiate HealthInsurance class
         pipeline = HealthInsurance()
 
@@ -38,7 +39,6 @@ def health_insurance_predict():
 
         # prediction
         data_response = pipeline.get_prediction(model, test_raw, data)
-
         return data_response
 
     else:
