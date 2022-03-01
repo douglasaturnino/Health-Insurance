@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-class HealthInsurance(object):
+class HealthInsurance():
     def __init__(self):
         self.home_path = os.getcwd()
         self.annual_premiun_scaler = pickle.load(open(os.path.join(
@@ -22,12 +22,10 @@ class HealthInsurance(object):
 
     def data_cleaning(self, data):
         # 1.1. Rename Columns
-        cols_new = ['id', 'gender', 'age', 'driving_license', 'region_code',
-                    'previously_insured', 'vehicle_age', 'vehicle_damage', 'annual_premium',
-                    'policy_sales_channel', 'vintage', 'response']
+        cols_new = ['annual_premium', 'vintage', 'age', 'region_code',
+                    'previously_insured', 'vehicle_age', 'vehicle_damage', 'policy_sales_channel', 'gender']
 
-        data.columns = cols_new
-        return data
+        return data[cols_new]
 
     def feature_engineering(self, data):
         # vehicle age
