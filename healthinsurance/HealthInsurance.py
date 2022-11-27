@@ -22,15 +22,14 @@ class HealthInsurance():
 
     def data_cleaning(self, data):
         # 1.1. Rename Columns
-        cols_new = ['annual_premium', 'vintage', 'age', 'region_code',
-                    'previously_insured', 'vehicle_age', 'vehicle_damage', 'policy_sales_channel', 'gender']
-
+        cols_new = ['annual_premium', 'vintage', 'age', 'region_code', 'previously_insured', 'vehicle_damage', 'policy_sales_channel']
+                   
+        
         return data[cols_new]
 
     def feature_engineering(self, data):
         # vehicle age
-        data['vehicle_age'] = data['vehicle_age'].apply(lambda x: 'over_2_years' if x == '> 2 Years' else
-                                                        'between_1_2_year' if x == '1-2 Year' else 'below_1_year')
+        #data['vehicle_age'] = data['vehicle_age'].apply(lambda x: 'over_2_years' if x == '> 2 Years' else                                                        'between_1_2_year' if x == '1-2 Year' else 'below_1_year')
         # vehicle damage
         data['vehicle_damage'] = data['vehicle_damage'].apply(
             lambda x: 1 if x == 'Yes' else 0)
@@ -49,23 +48,21 @@ class HealthInsurance():
             data[['vintage']].values)
 
         # gender
-        data.loc[:, 'gender'] = data['gender'].map(
-            self.target_encode_gender_scaler)
+        # data.loc[:, 'gender'] = data['gender'].map(self.target_encode_gender_scaler)
 
         # region_code
         data.loc[:, 'region_code'] = data['region_code'].map(
             self.target_encode_region_code_scaler)
 
         # vehicle_age
-        data = pd.get_dummies(data, prefix='vehicle_age',
-                              columns=['vehicle_age'])
+        # data = pd.get_dummies(data, prefix='vehicle_age', columns=['vehicle_age'])
 
         # policy_sales_channel
         data.loc[:, 'policy_sales_channel'] = data['policy_sales_channel'].map(
             self.fe_policy_sales_channel_scaler)
 
-        cols_selected = ['annual_premium', 'vintage',
-                         'age', 'region_code', 'vehicle_damage', 'previously_insured', 'policy_sales_channel']
+        cols_selected = ['annual_premium', 'vintage', 'age', 'region_code', 'previously_insured', 'vehicle_damage', 'policy_sales_channel']
+                        
 
         return data[cols_selected]
 

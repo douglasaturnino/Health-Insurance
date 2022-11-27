@@ -8,7 +8,7 @@ from healthinsurance.HealthInsurance import HealthInsurance
 home_path = os.getcwd()
 
 model = pickle.load(open(os.path.join(
-    home_path, 'models', 'model_linear_regression.pkl'), 'rb'))
+    home_path, 'models', 'model_xgb.pkl'), 'rb'))
 
 # initialize API
 app = Flask(__name__)
