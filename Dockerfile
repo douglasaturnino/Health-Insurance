@@ -1,5 +1,5 @@
 # Name the single Python image we're using everywhere.
-ARG python=python:3.8-slim-bullseye
+ARG python=python:3.10-slim-bullseye
 
 # Build stage:
 FROM ${python} AS build
@@ -7,11 +7,11 @@ FROM ${python} AS build
 # Install a full C toolchain and C build-time dependencies for
 # everything we're going to need.
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --no-install-recommends --assume-yes \
-      build-essential \
-      libpq-dev
-          
+   && DEBIAN_FRONTEND=noninteractive \
+   apt-get install --no-install-recommends --assume-yes \
+   build-essential \
+   libpq-dev
+
 # Create the virtual environment.
 RUN python3 -m venv /venv
 ENV PATH=/venv/bin:$PATH
@@ -32,10 +32,10 @@ COPY --from=build /venv /venv
 ENV PATH=/venv/bin:$PATH
 
 RUN apt-get update \
- && DEBIAN_FRONTEND=noninteractive \
-    apt-get install --no-install-recommends --assume-yes \
-    libgomp1 \
- && rm -rf /var/lib/apt/lists/* 
+   && DEBIAN_FRONTEND=noninteractive \
+   apt-get install --no-install-recommends --assume-yes \
+   libgomp1 \
+   && rm -rf /var/lib/apt/lists/* 
 
 # Copy the application in.
 COPY . .

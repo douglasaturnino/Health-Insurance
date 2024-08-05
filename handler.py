@@ -7,14 +7,13 @@ from healthinsurance.HealthInsurance import HealthInsurance
 # loading model
 home_path = os.getcwd()
 
-model = pickle.load(open(os.path.join(
-    home_path, 'src', 'models', 'model_xgb.pkl'), 'rb'))
+model = pickle.load(open(os.path.join(home_path, "models", "model_xgb.pkl"), "rb"))
 
 # initialize API
 app = Flask(__name__)
 
 
-@app.route('/predict', methods=['POST'])
+@app.route("/predict", methods=["POST"])
 def health_insurance_predict():
     test_json = request.get_json()
 
@@ -41,9 +40,9 @@ def health_insurance_predict():
         return data_response
 
     else:
-        return Response('{}', status=200, mimetype='application/json')
+        return Response("{}", status=200, mimetype="application/json")
 
 
-if __name__ == '__main__':
-    port = os.environ.get('PORT', 5000)
-    app.run('0.0.0.0', port=port)
+if __name__ == "__main__":
+    port = os.environ.get("PORT", 5000)
+    app.run("0.0.0.0", port=port)
